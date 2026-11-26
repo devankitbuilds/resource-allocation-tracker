@@ -3,4 +3,6 @@
 fastapi
 uvicorn[standard]
 pydantic-settings
-
+langchain
+langchain-ollama
+pytest

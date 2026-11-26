@@ -1,4 +1,3 @@
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,6 +8,12 @@ class Settings(BaseSettings):
     debug: bool = False
 
     ollama_base_url: str = "http://localhost:11434"
+
+    llm_provider: str = "ollama"
+    llm_model: str = "mistral:7b-instruct-q4_K_M"
+
+    embedding_model: str = "nomic-embed-text"
+    embedding_dimension: int = 768
 
     model_config = SettingsConfigDict(
         env_file=".env",
