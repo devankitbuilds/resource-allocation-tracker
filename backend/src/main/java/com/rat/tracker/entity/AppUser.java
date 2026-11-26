@@ -42,6 +42,12 @@ public class AppUser {
     @Column(nullable = false, length = 20)
     private UserRole role;
 
+    @Column(name = "is_active", nullable = false)
+    private boolean active = true;
+
+    @Column(name = "must_change_password", nullable = false)
+    private boolean mustChangePassword;
+
     @CreationTimestamp
     @Column(name = "created_at",
             nullable = false,

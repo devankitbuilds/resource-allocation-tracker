@@ -1,0 +1,21 @@
+# Secrets and local environment overrides
+.env
+.env.*
+!.env.example
+
+# Java and Maven output
+**/target/
+**/build/
+*.class
+
+# IDE and editor files
+**/.idea/
+**/.vscode/
+*.iml
+*.swp
+*.swo
+
+# Logs and operating-system metadata
+*.log
+.DS_Store
+Thumbs.db
