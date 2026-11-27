@@ -45,6 +45,26 @@ class UserManagementDatabaseTests {
     }
 
     @Test
+    void resumeImportMigrationCreatesDraftTableAndSeedsSkillAliases() {
+        assertEquals(1, count("""
+                SELECT COUNT(*) FROM information_schema.tables
+                WHERE table_schema = 'public' AND table_name = 'import_profile'
+                """));
+        assertEquals(6, count("""
+                SELECT COUNT(*) FROM skill
+                WHERE name IN ('React', 'Java', 'Spring Boot', 'AWS', 'SQL', 'Python')
+                """));
+        assertEquals(1, count("""
+                SELECT COUNT(*) FROM skill
+                WHERE name = 'React' AND aliases @> ARRAY['ReactJS', 'React.js']::TEXT[]
+                """));
+        assertEquals(1, count("""
+                SELECT COUNT(*) FROM skill
+                WHERE name = 'Spring Boot' AND aliases @> ARRAY['SpringBoot']::TEXT[]
+                """));
+    }
+
+    @Test
     void deletingUserPreservesAuditButRemovesOwnedSessionsAndChat() {
         String suffix = UUID.randomUUID().toString();
         Long adminId = createUser("admin-" + suffix + "@example.invalid", "ADMIN");
